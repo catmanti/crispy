@@ -1,0 +1,26 @@
+{% extends 'crispy/base.html' %}
+{% block content %}
+<div class="row">
+  {% for patient in patient_list %}
+  <div class="col-sm-6">
+    <div class="card text-white bg-dark mb-3">
+      <div class="card-body">
+        <dl class="row">
+          <dt class="h4 col-sm-3">Name:</dt>
+          <dd class="h4 col-sm-9">{{patient.full_name}}</dd>
+          <dt class=" col-sm-3">Address:</dt>
+          <dd class=" col-sm-9">{{patient.address}}</dd>
+          <dt class=" col-sm-3">Gender:</dt>
+          <dd class=" col-sm-9">{{patient.get_gender_display}}</dd>
+          <dt class=" col-sm-3">Birthday:</dt>
+          <dd class=" col-sm-9">{{patient.birthday}}</dd>
+          </dd>
+        </dl>
+        <a href="{% url 'patient_detail' patient.id %}" class="btn btn-primary">Patient Detail</a>
+        <a href="{% url 'patient_update' patient.id %}" class="btn btn-primary">Patient Update</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

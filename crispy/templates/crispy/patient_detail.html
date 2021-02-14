@@ -1,0 +1,37 @@
+{% extends 'crispy/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{patient.full_name}}</h5>
+                <p class="card-text">{{patient.birthday}}</p>
+                <p class="card-text">{{patient.get_gender_display}}</p>
+
+
+
+            </div>
+
+        </div>
+        <span class=" align-bottom">
+            <a href="{% url 'patients' %}" class="btn btn-primary"><i class="bi bi-arrow-left-circle"></i>Home</a>
+            <a href="{% url 'patient_update' patient.id %}" class="btn btn-primary"><i
+                    class="bi bi-arrow-up-circle"></i>Update</a>
+            <a href="{% url 'patient_delete' patient.id %}" class="btn btn-danger"><i
+                    class="bi bi-x-circle"></i>Delete</a>
+        </span>
+    </div>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div>
+            {% for his in history %}
+            <p>{{his.symptoms}}</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
