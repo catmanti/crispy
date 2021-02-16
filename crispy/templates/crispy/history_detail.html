@@ -1,0 +1,48 @@
+
+{% extends 'crispy/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{history.symptoms}}</h5>
+                <p class="card-text">{{history.diagnosis}}</p>
+                <p class="card-text">{{history.investigations}}</p>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div>
+            <table class="table table-hover">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Drug</th>
+                    <th scope="col">Dose</th>
+                    <th scope="col">Regim</th>
+                    <th scope="col">No of Tabs</th>
+                  </tr>
+                </thead>
+                <tbody>
+            {% for pres in prescription %}
+                  <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{pres.drug}}</td>
+                    <td>{{pres.dose}}</td>
+                    <td>{{pres.regim}}</td>
+                    <td>{{pres.no_of_tabs}}</td>
+                  </tr>
+            {% endfor %}
+                  </tbody>
+              </table>
+            <p></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
