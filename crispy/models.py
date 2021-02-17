@@ -1,7 +1,5 @@
 from django.db import models
 from django.urls import reverse
-# Create your models here.
-
 
 class Patient(models.Model):
     """Patient Class """
@@ -50,6 +48,8 @@ class History(models.Model):
     def __str__(self):
         return (self.patient.full_name)
 
+    def get_absolute_url(self):
+        return reverse("history_detail", kwargs={"pk": self.pk})
 
 class Drug(models.Model):
     drug_name = models.CharField(unique=True, max_length=50)

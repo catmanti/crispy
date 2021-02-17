@@ -7,9 +7,13 @@
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">{{history.symptoms}}</h5>
+                <h5 class="card-title">{{history.patient}}</h5>
+                <h6 class="card-title">{{history.symptoms}}</h5>
                 <p class="card-text">{{history.diagnosis}}</p>
                 <p class="card-text">{{history.investigations}}</p>
+                <a href="{% url 'patient_detail' history.patient.id %}" class="btn btn-primary"><i class="bi bi-arrow-left-circle"></i>Back</a>
+                <a href="{% url 'history_update' history.id %}" class="btn btn-info"><i class="bi bi-arrow-up-circle"></i>Update</a>
+                <a href="{% url 'history_delete' history.id %}" class="btn btn-danger"><i class="bi bi-x-circle"></i>Delete</a>
                 
             </div>
 
