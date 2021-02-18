@@ -1,7 +1,8 @@
 from django import forms
+from django.forms import HiddenInput
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Row, Column
-from crispy.models import Patient
+from crispy_forms.layout import Layout, Submit, Row, Column, Field
+from crispy.models import Patient, History
 
 STATES = (
     ('', 'Choose...'),
@@ -54,3 +55,13 @@ class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         fields = '__all__'
+
+
+class HistoryForm(forms.ModelForm):
+    class Meta:
+        model = History
+        fields = ('patient', 'symptoms', 'diagnosis', 'investigations', 'bp')
+
+    def __init__(self, *args, **kwargs):
+        super(HistoryForm, self).__init__(*args, **kwargs)
+        self.fields['patient'].widget = HiddenInput()

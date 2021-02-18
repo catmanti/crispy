@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views import generic
 from django.urls import reverse_lazy
 
-# from crispy.forms import AddressForm, PatientForm
+from crispy.forms import HistoryForm
 from crispy.models import Patient, History, Prescription
 
 
@@ -37,27 +37,40 @@ class PatientDeleteView(generic.DeleteView):
     model = Patient
     success_url = reverse_lazy('patients')
 
+
 class HistoryDetailView(generic.DetailView):
     model = History
     fields = '__all__'
 
     def get_context_data(self, **kwargs):
-            context = super(HistoryDetailView, self).get_context_data(**kwargs)
-            prescription = Prescription.objects.filter(history=self.kwargs['pk'])
-            context['prescription'] = prescription
-            return context
+        context = super(HistoryDetailView, self).get_context_data(**kwargs)
+        prescription = Prescription.objects.filter(history=self.kwargs['pk'])
+        context['prescription'] = prescription
+        return context
+
 
 class HistoryCreateView(generic.CreateView):
     model = History
-    fields = '__all__'
-    
+    # fields = '__all__'
+    form_class = HistoryForm
+    success_url = reverse_lazy('patients')
+
+    def get_initial(self):
+        patient = get_object_or_404(Patient, pk=self.kwargs.get('ptid'))
+        return {
+            'patient': patient
+        }
+
+
 class HistoryUpdateView(generic.UpdateView):
     model = History
     fields = '__all__'
 
+
 class HistoryDeleteView(generic.DeleteView):
     model = History
     success_url = reverse_lazy('patients')
+
 
 def test(request):
     return render(request, 'crispy/test.html', {'columns': ['man', 'chan', 'can', 'van']})
