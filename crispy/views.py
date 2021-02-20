@@ -52,9 +52,7 @@ class HistoryDetailView(generic.DetailView):
 class HistoryCreateView(generic.CreateView):
     model = History
     form_class = HistoryForm
-    ptid = None
     success_url = reverse_lazy('patients')
-    extra_context = {'myurl': 'patients'}
 
     def get_initial(self):
         patient = get_object_or_404(Patient, pk=self.kwargs.get('ptid'))
@@ -63,6 +61,7 @@ class HistoryCreateView(generic.CreateView):
         }
 
     def get_context_data(self, **kwargs):
+        """ To function history_form.html back button add id and url """
         context = super(HistoryCreateView, self).get_context_data(**kwargs)
         ptid = get_object_or_404(Patient, pk=self.kwargs.get('ptid'))
         context['myid'] = ptid.id
