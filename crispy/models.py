@@ -91,3 +91,6 @@ class Prescription(models.Model):
 
     def __str__(self):
         return str(self.history)
+
+    def get_absolute_url(self):
+        return reverse("history_detail", kwargs={"pk": self.history.pk})

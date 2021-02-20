@@ -1,0 +1,15 @@
+{% extends 'crispy/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+
+    {{ form|crispy }}
+
+    <input class="btn btn-primary " type="submit" value="Submit">
+    {% comment %} <a href="{% url 'patient_detail' patient.id %}" class="btn btn-info"><i class="bi bi-arrow-left-circle"></i>Back</a> {% endcomment %}
+</form>
+
+{% endblock %}

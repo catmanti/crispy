@@ -13,7 +13,11 @@
     {% comment %} {{ form|crispy }} {% endcomment %}
 
     <input class="btn btn-primary " type="submit" value="Submit">
-    <a href="{% url myurl myid %}" class="btn btn-info"><i class="bi bi-arrow-left-circle"></i>Back</a>
+    {% if isUpdate %}
+    <a href="{{history.get_absolute_url}}" class="btn btn-info"><i class="bi bi-arrow-left-circle"></i>Back to History</a>
+    {% else %}
+    <a href="{% url myurl myid %}" class="btn btn-info"><i class="bi bi-arrow-left-circle"></i>Back to Patient</a>
+    {% endif %}
 
 </form>
 

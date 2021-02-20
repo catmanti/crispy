@@ -15,10 +15,8 @@ class PatientDetailView(generic.DetailView):
     model = Patient
 
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get the context
         context = super(PatientDetailView, self).get_context_data(**kwargs)
         history = History.objects.filter(patient=self.kwargs['pk'])
-        # Create any data and add it to the context
         context['history'] = history
         return context
 
@@ -31,6 +29,7 @@ class PatientCreateView(generic.CreateView):
 class PatientUpdateView(generic.UpdateView):
     model = Patient
     fields = '__all__'
+    extra_context = {'isUpdate': True}
 
 
 class PatientDeleteView(generic.DeleteView):
@@ -52,7 +51,6 @@ class HistoryDetailView(generic.DetailView):
 class HistoryCreateView(generic.CreateView):
     model = History
     form_class = HistoryForm
-    # success_url = reverse_lazy('patients')
 
     def get_initial(self):
         patient = get_object_or_404(Patient, pk=self.kwargs.get('ptid'))
@@ -72,17 +70,17 @@ class HistoryCreateView(generic.CreateView):
 class HistoryUpdateView(generic.UpdateView):
     model = History
     fields = '__all__'
-
-    def get_context_data(self, **kwargs):
-        context = super(HistoryUpdateView, self).get_context_data(**kwargs)
-        context['myid'] = self.kwargs['pk']
-        context['myurl'] = 'history_detail'
-        return context
+    extra_context = {'isUpdate': True}
 
 
 class HistoryDeleteView(generic.DeleteView):
     model = History
     success_url = reverse_lazy('patients')
+
+
+class PrescriptionCreateView(generic.CreateView):
+    model = Prescription
+    fields = '__all__'
 
 
 def test(request):

@@ -9,7 +9,11 @@
     {{ form|crispy }}
 
     <input class="btn btn-primary " type="submit" value="Submit">
-    <a href="{% url 'patient_detail' patient.id %}" class="btn btn-info"><i class="bi bi-arrow-left-circle"></i>Back</a>
+    {% if isUpdate %}
+    <a href="{{patient.get_absolute_url}}" class="btn btn-info"><i class="bi bi-arrow-left-circle"></i>Back</a>
+    {% else %}
+    <a href="{%url 'patients' %}" class="btn btn-info"><i class="bi bi-arrow-left-circle"></i>Back</a>
+    {% endif %}
 </form>
 
 {% endblock %}
