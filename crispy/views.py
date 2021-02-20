@@ -72,10 +72,14 @@ class HistoryCreateView(generic.CreateView):
 class HistoryUpdateView(generic.UpdateView):
     model = History
     fields = '__all__'
-    extra_context = {
-        'myurl': 'history_detail',
-        'myid': 'history.id'
-    }
+
+    def get_context_data(self, **kwargs):
+        context = super(HistoryUpdateView, self).get_context_data(**kwargs)
+        myid = self.kwargs['pk']
+        print('------', myid)
+        context['myid'] = myid
+        context['myurl'] = 'history_detail'
+        return context
 
 
 class HistoryDeleteView(generic.DeleteView):
