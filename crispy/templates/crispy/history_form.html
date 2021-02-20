@@ -5,15 +5,15 @@
 {% block content %}
 <form action="" method="post">
     {% csrf_token %}
-{{ form.patient|as_crispy_field  }}
-{{ form.symptoms|as_crispy_field  }}
-{{ form.diagnosis|as_crispy_field  }}
-{{ form.investigations|as_crispy_field  }}
-{{ form.bp|as_crispy_field  }}
+    {{ form.patient|as_crispy_field  }}
+    {{ form.symptoms|as_crispy_field  }}
+    {{ form.diagnosis|as_crispy_field  }}
+    {{ form.investigations|as_crispy_field  }}
+    {{ form.bp|as_crispy_field  }}
     {% comment %} {{ form|crispy }} {% endcomment %}
 
     <input class="btn btn-primary " type="submit" value="Submit">
-    <a href="#" class="btn btn-info"><i class="bi bi-arrow-left-circle"></i>Back</a>
+    <a href="{% url myurl myid %}" class="btn btn-info"><i class="bi bi-arrow-left-circle"></i>Back</a>
 
 </form>
 
