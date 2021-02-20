@@ -49,8 +49,8 @@ class History(models.Model):
     def __str__(self):
         return (self.patient.full_name)
 
-    # def get_absolute_url(self):
-    #     return reverse("history_detail", kwargs={"pk": self.pk})
+    def get_absolute_url(self):
+        return reverse("history_detail", kwargs={"pk": self.pk})
 
 
 class Drug(models.Model):

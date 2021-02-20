@@ -52,7 +52,7 @@ class HistoryDetailView(generic.DetailView):
 class HistoryCreateView(generic.CreateView):
     model = History
     form_class = HistoryForm
-    success_url = reverse_lazy('patients')
+    # success_url = reverse_lazy('patients')
 
     def get_initial(self):
         patient = get_object_or_404(Patient, pk=self.kwargs.get('ptid'))
@@ -75,9 +75,7 @@ class HistoryUpdateView(generic.UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(HistoryUpdateView, self).get_context_data(**kwargs)
-        myid = self.kwargs['pk']
-        print('------', myid)
-        context['myid'] = myid
+        context['myid'] = self.kwargs['pk']
         context['myurl'] = 'history_detail'
         return context
 
