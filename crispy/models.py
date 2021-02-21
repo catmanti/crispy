@@ -24,6 +24,7 @@ class Patient(models.Model):
     class Meta:
         verbose_name = "patient"
         verbose_name_plural = "patients"
+        ordering = ['-id']
 
     @property
     def full_name(self):
@@ -45,6 +46,9 @@ class History(models.Model):
     diagnosis = models.CharField(max_length=50, blank=True)
     investigations = models.CharField(max_length=100, blank=True)
     bp = models.CharField(max_length=10, blank=True)
+
+    class Meta:
+        ordering = ['-time']
 
     def __str__(self):
         return (self.patient.full_name)

@@ -1,5 +1,7 @@
 from django.urls import path
-from crispy.views import PatientListView, PatientDetailView, PatientCreateView, PatientUpdateView, PatientDeleteView, test, HistoryDetailView, HistoryCreateView, HistoryUpdateView, HistoryDeleteView, PrescriptionCreateView
+from crispy.views import PatientListView, PatientDetailView, PatientCreateView, \
+    PatientUpdateView, PatientDeleteView, test, HistoryDetailView, HistoryCreateView, \
+    HistoryUpdateView, HistoryDeleteView, PrescriptionCreateView
 
 urlpatterns = [
     path('', PatientListView.as_view(), name='patients'),
